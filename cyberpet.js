@@ -1,15 +1,20 @@
-// let input = prompt("input your details here:");
-// console.log(input);
+const play = document.querySelector(".play");
+const feed = document.querySelector(".feed");
+const drink = document.querySelector(".drink");
+
+const happiness = document.querySelector(".happiness");
+const hunger = document.querySelector(".hunger");
+const thrist = document.querySelector(".thrist");
 
 class Animal {
-  constructor(hunger = 100, thrist = 100, happniess = 100) {
+  constructor(hunger = 50, thrist = 50, happiness = 50) {
     (this.hunger = hunger),
       (this.thrist = thrist),
-      (this.happniess = happniess);
+      (this.happiness = happiness);
   }
 
   play() {
-    this.happniess += 10;
+    this.happiness += 10;
     this.hunger -= 9;
     this.thrist -= 3;
   }
@@ -17,27 +22,35 @@ class Animal {
   feed() {
     this.hunger += 5;
     this.thrist -= 3;
-    this.happniess -= 3;
+    this.happiness -= 3;
   }
 
   giveDrinks() {
     this.thrist += 5;
     this.hunger -= 3;
-    this.happniess -= 3;
+    this.happiness += 3;
   }
 }
 
 const animal1 = new Animal();
-const currentTime = new Date();
 
-for (let i = 0; i < 10; i++) {
-  setTimeout(function () {
-    animal1.happniess -= 1;
-    animal1.thrist -= 1;
-    animal1.hunger -= 1;
-    console.log(animal1);
-  }, 1000 * i);
-}
+const updateData = function () {
+  happiness.childNodes[3].innerHTML = animal1.happiness;
+  hunger.childNodes[3].innerHTML = animal1.hunger;
+  thrist.childNodes[3].innerHTML = animal1.thrist;
+};
 
-// animal1.play();
-// console.log(animal1);
+play.addEventListener("click", function () {
+  animal1.play();
+  updateData();
+});
+
+feed.addEventListener("click", function () {
+  animal1.feed();
+  updateData();
+});
+
+drink.addEventListener("click", function () {
+  animal1.giveDrinks();
+  updateData();
+});
