@@ -40,6 +40,13 @@ const updateData = function () {
   thrist.childNodes[3].innerHTML = animal1.thrist;
 };
 
+const idle = function () {
+  animal1.happiness -= 1;
+  animal1.hunger -= 1;
+  animal1.thrist -= 1;
+  updateData();
+};
+
 play.addEventListener("click", function () {
   animal1.play();
   updateData();
@@ -54,3 +61,7 @@ drink.addEventListener("click", function () {
   animal1.giveDrinks();
   updateData();
 });
+
+setInterval(function () {
+  idle();
+}, 5000);
