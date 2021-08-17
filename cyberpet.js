@@ -72,7 +72,7 @@ const animal1 = new Animal();
 const updateDataOnScreen = () => {
     document.getElementById("happy").innerHTML = animal1.happiness;
     hunger.childNodes[3].innerHTML = animal1.hunger;
-    thrist.childNodes[3].innerHTML = animal1.thirst;
+    thirst.childNodes[3].innerHTML = animal1.thirst;
 };
 
 const idle = function() {
