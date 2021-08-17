@@ -13,9 +13,7 @@ class Animal {
       (this.happiness = happiness);
   }
 
-  // let self = this.hunger.bind(this);
-
-  maxminValue(value1, value2, value3) {
+  setValue(value1, value2, value3) {
     value1 >= 0
       ? this.happiness + value1 >= 100
         ? (this.happiness = 100)
@@ -41,15 +39,15 @@ class Animal {
   }
 
   play() {
-    this.maxminValue(10, -2, -2);
+    this.setValue(10, -2, -2);
   }
 
   feed() {
-    this.maxminValue(3, 8, -6);
+    this.setValue(3, 8, -6);
   }
 
   giveDrinks() {
-    this.maxminValue(-5, -4, 10);
+    this.setValue(-5, -4, 10);
   }
 }
 
