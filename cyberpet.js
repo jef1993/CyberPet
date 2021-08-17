@@ -4,46 +4,67 @@ const drink = document.querySelector(".drink");
 
 const happiness = document.querySelector(".happiness");
 const hunger = document.querySelector(".hunger");
-const thrist = document.querySelector(".thrist");
+const thirst = document.querySelector(".thirst");
 
 class Animal {
-  constructor(hunger = 50, thrist = 50, happiness = 50) {
+  constructor(hunger = 50, thirst = 50, happiness = 50) {
     (this.hunger = hunger),
-      (this.thrist = thrist),
+      (this.thirst = thirst),
       (this.happiness = happiness);
   }
 
+  // let self = this.hunger.bind(this);
+
+  maxminValue(value1, value2, value3) {
+    value1 >= 0
+      ? this.happiness + value1 >= 100
+        ? (this.happiness = 100)
+        : (this.happiness += value1)
+      : this.happiness + value1 <= 0
+      ? (this.happiness = 0)
+      : (this.happiness += value1);
+    value2 >= 0
+      ? this.hunger + value2 >= 100
+        ? (this.hunger = 100)
+        : (this.hunger += value2)
+      : this.hunger + value2 <= 0
+      ? (this.hunger = 0)
+      : (this.hunger += value2);
+
+    value3 >= 0
+      ? this.thirst + value3 >= 100
+        ? (this.thirst = 100)
+        : (this.thirst += value3)
+      : this.thirst + value3 <= 0
+      ? (this.thirst = 0)
+      : (this.thirst += value3);
+  }
+
   play() {
-    this.happiness += 10;
-    this.hunger -= 9;
-    this.thrist -= 3;
+    this.maxminValue(10, -2, -2);
   }
 
   feed() {
-    this.hunger += 5;
-    this.thrist -= 3;
-    this.happiness -= 3;
+    this.maxminValue(3, 8, -6);
   }
 
   giveDrinks() {
-    this.thrist += 5;
-    this.hunger -= 3;
-    this.happiness += 3;
+    this.maxminValue(-5, -4, 10);
   }
 }
 
 const animal1 = new Animal();
 
 const updateData = function () {
-  happiness.childNodes[3].innerHTML = animal1.happiness;
-  hunger.childNodes[3].innerHTML = animal1.hunger;
-  thrist.childNodes[3].innerHTML = animal1.thrist;
+  document.querySelector(".hunger__value").innerHTML = animal1.hunger;
+  document.querySelector(".thirst__value").innerHTML = animal1.thirst;
+  document.querySelector(".happiness__value").innerHTML = animal1.happiness;
 };
 
 const idle = function () {
-  animal1.happiness -= 1;
-  animal1.hunger -= 1;
-  animal1.thrist -= 1;
+  if (animal1.happiness > 0) animal1.happiness -= 1;
+  if (animal1.hunger > 0) animal1.hunger -= 1;
+  if (animal1.thirst > 0) animal1.thirst -= 1;
   updateData();
 };
 
