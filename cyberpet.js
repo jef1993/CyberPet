@@ -4,43 +4,43 @@ const drink = document.querySelector(".drink");
 
 const happiness = document.querySelector(".happiness");
 const hunger = document.querySelector(".hunger");
-const thrist = document.querySelector(".thrist");
+const thirst = document.querySelector(".thirst");
 
 class Animal {
-    constructor(hunger = 50, thrist = 50, happiness = 50) {
+    constructor(hunger = 50, thirst = 50, happiness = 50) {
         (this.hunger = hunger),
-        (this.thrist = thrist),
+        (this.thirst = thirst),
         (this.happiness = happiness);
     }
 
     play() {
         this.happiness += 10;
         this.hunger -= 9;
-        this.thrist -= 3;
+        this.thirst -= 3;
         this.maxminvalue();
     }
 
     feed() {
         this.hunger += 5;
-        this.thrist -= 3;
+        this.thirst -= 3;
         this.happiness -= 3;
         this.maxminvalue();
     }
 
     giveDrinks() {
-        this.thrist += 5;
+        this.thirst += 5;
         this.hunger -= 3;
         this.happiness += 3;
         this.maxminvalue();
     }
     maxminvalue() {
         // check if the value is = 100 or > 100 we change the value to 100
-        if (this.thrist >= 100) {
-            this.thrist = 100;
+        if (this.thirst >= 100) {
+            this.thirst = 100;
         }
 
-        if (this.thrist <= 0) {
-            this.thrist = 0;
+        if (this.thirst <= 0) {
+            this.thirst = 0;
         }
 
         if (this.hunger >= 100) {
@@ -72,13 +72,13 @@ const animal1 = new Animal();
 const updateDataOnScreen = () => {
     document.getElementById("happy").innerHTML = animal1.happiness;
     hunger.childNodes[3].innerHTML = animal1.hunger;
-    thrist.childNodes[3].innerHTML = animal1.thrist;
+    thrist.childNodes[3].innerHTML = animal1.thirst;
 };
 
 const idle = function() {
     animal1.happiness -= 1;
     animal1.hunger -= 1;
-    animal1.thrist -= 1;
+    animal1.thirst -= 1;
     animal1.maxminvalue();
     updateDataOnScreen();
 };
