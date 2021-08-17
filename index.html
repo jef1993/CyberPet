@@ -9,26 +9,46 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="type">animal</h1>
-      <ul class="list">
-        <li class="happiness">
-          <div class="happiness__attr attr">happiness</div>
-          <div class="happiness__value value">50</div>
-        </li>
-        <li class="hunger">
-          <div class="hunger__attr attr">hunger</div>
-          <div class="hunger__value value">50</div>
-        </li>
-        <li class="thrist">
-          <div class="thirst__attr attr">thirst</div>
-          <div class="thirst__value value">50</div>
-        </li>
-      </ul>
+      <div class="menu">
+        <div class="menu-title">Choose your type</div>
 
-      <div class="btns">
-        <div class="play">play</div>
-        <div class="feed">feed</div>
-        <div class="drink">drink</div>
+        <div class="option">
+          <label for="rabbit">Rabbit</label>
+          <input type="radio" name="animal-type" id="rabbit" value="rabbit" />
+        </div>
+        <div class="option">
+          <label for="rabbit">Wolf</label>
+          <input type="radio" name="animal-type" id="wolf" value="wolf" />
+        </div>
+        <div class="option">
+          <label for="rabbit">Dragon</label>
+          <input type="radio" name="animal-type" id="dragon" value="dragon" />
+        </div>
+        <div class="start">Start</div>
+      </div>
+
+      <div class="game hidden">
+        <h1 class="type">animal</h1>
+        <ul class="list">
+          <li class="happiness">
+            <div class="happiness__attr attr">happiness</div>
+            <div class="happiness__value value">50</div>
+          </li>
+          <li class="hunger">
+            <div class="hunger__attr attr">hunger</div>
+            <div class="hunger__value value">50</div>
+          </li>
+          <li class="thrist">
+            <div class="thirst__attr attr">thirst</div>
+            <div class="thirst__value value">50</div>
+          </li>
+        </ul>
+
+        <div class="btns">
+          <div class="play">play</div>
+          <div class="feed">feed</div>
+          <div class="drink">drink</div>
+        </div>
       </div>
     </div>
   </body>
