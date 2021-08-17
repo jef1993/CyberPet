@@ -15,18 +15,21 @@ class Animal {
 
   play() {
     this.happiness += 10;
+
     this.hunger -= 9;
     this.thrist -= 3;
   }
 
   feed() {
     this.hunger += 5;
+
     this.thrist -= 3;
     this.happiness -= 3;
   }
 
   giveDrinks() {
     this.thrist += 5;
+
     this.hunger -= 3;
     this.happiness += 3;
   }
