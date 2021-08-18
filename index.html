@@ -5,26 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>CyberPet</title>
   </head>
   <body>
     <div class="container">
       <div class="menu">
-        <div class="menu-title">Choose your type</div>
+        <div class="title menu-title">Choose your type</div>
 
         <div class="option">
           <label for="rabbit">Rabbit</label>
-          <input type="radio" name="animal-type" id="rabbit" value="rabbit" />
+          <input
+            class="radio"
+            type="radio"
+            name="animal-type"
+            id="rabbit"
+            value="rabbit"
+            checked="checked"
+          />
         </div>
         <div class="option">
-          <label for="rabbit">Wolf</label>
-          <input type="radio" name="animal-type" id="wolf" value="wolf" />
+          <label for="wolf">Wolf</label>
+          <input
+            class="radio"
+            type="radio"
+            name="animal-type"
+            id="wolf"
+            value="wolf"
+          />
         </div>
         <div class="option">
-          <label for="rabbit">Dragon</label>
-          <input type="radio" name="animal-type" id="dragon" value="dragon" />
+          <label for="dragon">Dragon</label>
+          <input
+            class="radio"
+            type="radio"
+            name="animal-type"
+            id="dragon"
+            value="dragon"
+          />
         </div>
-        <div class="start">Start</div>
+        <div class="main-btn start">Start</div>
       </div>
 
       <div class="game hidden">
@@ -49,6 +68,11 @@
           <div class="feed">feed</div>
           <div class="drink">drink</div>
         </div>
+      </div>
+
+      <div class="game-over hidden">
+        <div class="title">Game Over</div>
+        <div class="main-btn restart">Restart</div>
       </div>
     </div>
   </body>

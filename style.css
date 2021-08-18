@@ -20,8 +20,9 @@ body {
   text-align: center;
 }
 
-.menu-title {
+.title {
   text-transform: capitalize;
+  text-align: center;
   font-size: 25px;
   font-weight: 600;
   margin-bottom: 25px;
@@ -39,9 +40,10 @@ body {
   margin-right: 50px;
 }
 
-.start {
+.main-btn {
   margin-top: 25px;
   align-self: center;
+  text-align: center;
   width: 100px;
   font-size: 20px;
   padding: 10px 10px;
@@ -69,18 +71,19 @@ body {
 
 .type {
   text-transform: uppercase;
+  text-align: center;
 }
 
 .list {
   list-style: none;
   padding: 0;
-  margin: 30px;
+
   text-transform: capitalize;
 }
 
-li {
-  width: 250px;
+.list li {
   font-size: 30px;
+  margin: 0 10px;
   display: flex;
   justify-content: space-between;
 }
