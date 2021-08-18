@@ -1,64 +1,49 @@
-const play = document.querySelector(".play");
-const feed = document.querySelector(".feed");
-const drink = document.querySelector(".drink");
-
-const happiness = document.querySelector(".happiness");
-const hunger = document.querySelector(".hunger");
-const thirst = document.querySelector(".thirst");
-const start = document.querySelector(".start");
-const menu = document.querySelector(".menu");
+const rabbit = document.querySelector("#rabbit");
 const game = document.querySelector(".game");
 const gameOver = document.querySelector(".game-over");
+const start = document.querySelector(".start");
 const restart = document.querySelector(".restart");
+const menu = document.querySelector(".menu");
 const radio = document.querySelectorAll(".radio");
 const type = document.querySelector(".type");
+const btnsChildren = document.querySelectorAll(".btns *");
+const values = document.querySelectorAll(".value");
 
+// Parent class
 class Animal {
-  constructor(hunger = 50, thirst = 50, happiness = 50, decayValue = 5) {
-    (this.hunger = hunger),
+  constructor(happiness = 50, hunger = 50, thirst = 50, decayValue = 5) {
+    (this.happiness = happiness),
+      (this.hunger = hunger),
       (this.thirst = thirst),
-      (this.happiness = happiness),
       (this.decayValue = decayValue);
   }
 
-  setValue(value1, value2, value3) {
-    value1 >= 0
-      ? this.happiness + value1 >= 100
-        ? (this.happiness = 100)
-        : (this.happiness += value1)
-      : this.happiness + value1 <= 0
-      ? (this.happiness = 0)
-      : (this.happiness += value1);
-    value2 >= 0
-      ? this.hunger + value2 >= 100
-        ? (this.hunger = 100)
-        : (this.hunger += value2)
-      : this.hunger + value2 <= 0
-      ? (this.hunger = 0)
-      : (this.hunger += value2);
-
-    value3 >= 0
-      ? this.thirst + value3 >= 100
-        ? (this.thirst = 100)
-        : (this.thirst += value3)
-      : this.thirst + value3 <= 0
-      ? (this.thirst = 0)
-      : (this.thirst += value3);
+  setValueAll(values) {
+    for (let i = 0; i < Object.keys(this).length - 1; i++) {
+      values[i] >= 0
+        ? this[Object.keys(this)[i]] + values[i] >= 100
+          ? (this[Object.keys(this)[i]] = 100)
+          : (this[Object.keys(this)[i]] += values[i])
+        : this[Object.keys(this)[i]] + values[i] <= 0
+        ? (this[Object.keys(this)[i]] = 0)
+        : (this[Object.keys(this)[i]] += values[i]);
+    }
   }
 
   play(happiness = 10, hunger = -2, thrist = -2) {
-    this.setValue(happiness, hunger, thrist);
+    this.setValueAll([happiness, hunger, thrist]);
   }
 
   feed(happiness = 2, hunger = 10, thrist = -2) {
-    this.setValue(happiness, hunger, thrist);
+    this.setValueAll([happiness, hunger, thrist]);
   }
 
   giveDrinks(happiness = -2, hunger = -2, thrist = 10) {
-    this.setValue(happiness, hunger, thrist);
+    this.setValueAll([happiness, hunger, thrist]);
   }
 }
 
+// sub-classes of Animal
 class Rabbit extends Animal {
   constructor(hunger, thirst, happiness, decayValue) {
     super(hunger, thirst, happiness, decayValue);
@@ -110,22 +95,31 @@ class Dragon extends Animal {
     super.giveDrinks(-3, -3, 8);
   }
 }
-
-let currentAnimal = radio[0].value;
-type.innerHTML = "rabbit";
-let myAnimal = new Rabbit();
+///////////////////////////////////////////////////////////////
+let currentAnimal;
+let myAnimal;
 let counter;
 
+// set the default chosen animal
+const defaultAnimal = function () {
+  currentAnimal = radio[0].value;
+  myAnimal = new Rabbit();
+  rabbit.checked = "checked";
+};
+
+defaultAnimal();
+
+// change my current animal choice by listening on radio button
 radio.forEach((el) =>
   el.addEventListener("click", function (e) {
     currentAnimal = e.target.value;
-    type.innerHTML = e.target.value;
     if (currentAnimal === "rabbit") myAnimal = new Rabbit();
     if (currentAnimal === "wolf") myAnimal = new Wolf();
     if (currentAnimal === "dragon") myAnimal = new Dragon();
   })
 );
 
+// Check if any of the attribute
 const checkStatus = function () {
   if (myAnimal.hunger <= 0 || myAnimal.thirst <= 0 || myAnimal.happiness <= 0) {
     game.classList.toggle("hidden");
@@ -133,44 +127,48 @@ const checkStatus = function () {
     clearInterval(counter);
   }
 };
+
+// Updating data of all attributes
 const updateData = function () {
-  document.querySelector(".hunger__value").innerHTML = myAnimal.hunger;
-  document.querySelector(".thirst__value").innerHTML = myAnimal.thirst;
-  document.querySelector(".happiness__value").innerHTML = myAnimal.happiness;
+  values.forEach(
+    (el, i) => (el.innerHTML = myAnimal[Object.keys(myAnimal)[i]])
+  );
   checkStatus();
 };
 
+// Attributes decrease on idle
 const idle = function () {
-  if (myAnimal.happiness > 0) myAnimal.happiness -= 1;
-  if (myAnimal.hunger > 0) myAnimal.hunger -= 1;
-  if (myAnimal.thirst > 0) myAnimal.thirst -= 1;
+  for (let i = 0; i < 3; i++) {
+    if (myAnimal[Object.keys(myAnimal)[i]] > 0)
+      myAnimal[Object.keys(myAnimal)[i]] -= 1;
+  }
   updateData();
 };
 
-play.addEventListener("click", function () {
-  myAnimal.play();
-  updateData();
-});
+// Add functions to all buttons on game page
+btnsChildren.forEach((el, i) =>
+  el.addEventListener("click", function () {
+    el.classList.contains("play")
+      ? myAnimal.play()
+      : el.classList.contains("feed")
+      ? myAnimal.feed()
+      : myAnimal.giveDrinks();
+    updateData();
+  })
+);
 
-feed.addEventListener("click", function () {
-  myAnimal.feed();
-  updateData();
-});
-
-drink.addEventListener("click", function () {
-  myAnimal.giveDrinks();
-  updateData();
-});
-
+// Add functions to start button on main menu
 start.addEventListener("click", () => {
+  type.innerHTML = currentAnimal;
   updateData();
   game.classList.toggle("hidden");
   menu.classList.toggle("hidden");
   counter = setInterval(idle, 1000 * myAnimal.decayValue);
 });
 
+// Add functions to restart button on game over
 restart.addEventListener("click", () => {
-  myAnimal = new Rabbit();
+  defaultAnimal();
   gameOver.classList.toggle("hidden");
   menu.classList.toggle("hidden");
 });
