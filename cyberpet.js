@@ -145,7 +145,7 @@ const idle = function () {
   updateData();
 };
 
-// Add functions to all buttons on game page
+// Add actions to all buttons on game page
 btnsChildren.forEach((el, i) =>
   el.addEventListener("click", function () {
     el.classList.contains("play")
@@ -157,7 +157,7 @@ btnsChildren.forEach((el, i) =>
   })
 );
 
-// Add functions to start button on main menu
+// Add actions to start button on main menu
 start.addEventListener("click", () => {
   type.innerHTML = currentAnimal;
   updateData();
@@ -166,7 +166,7 @@ start.addEventListener("click", () => {
   counter = setInterval(idle, 1000 * myAnimal.decayValue);
 });
 
-// Add functions to restart button on game over
+// Add actions to restart button on game over
 restart.addEventListener("click", () => {
   defaultAnimal();
   gameOver.classList.toggle("hidden");
